@@ -48,10 +48,25 @@
         rustc
         protobuf_27
         protoc-gen-go
+        statix
         protoc-gen-js
         bun
         nodejs_22
-        # buf-language-server
+        # (pkgs.rustPlatform.buildRustPackage rec {  looks like it taking flit sources
+        #   pname = "protols";
+        #   version = "0.5.0";
+        #   src = pkgs.fetchFromGitHub {
+        #     owner = "coder3101";
+        #     repo = "protols";
+        #     rev = "993120b7ea68f015db8bef6912dbc8bb9098504e";
+        #     hash = "sha256-lLlad/kbrjwPE8ZdzebJMhA06AqpmEI+PJCWz12LYRM=";
+        #   };
+        #   cargoSha256 = "03wf9r2csi6jpa7v5sw5lpxkrk4wfzwmzx7k3991q3bdjzcwnnwp";
+        #   cargoLock = {
+        #     lockFile = "${src}/Cargo.lock";
+        #     # allowBuiltinFetchGit = true;
+        #   };
+        # })
       ];
       imports = [
         nixvim.nixDarwinModules.nixvim

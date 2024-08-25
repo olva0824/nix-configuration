@@ -352,6 +352,83 @@
       };
 
       noice.enable = true;
+      startup = {
+        enable = true;
+
+        colors = {
+          background = "#ffffff";
+          foldedSection = "#ffffff";
+        };
+
+        sections = {
+          header = {
+            type = "text";
+            oldfilesDirectory = false;
+            align = "center";
+            foldSection = false;
+            title = "Header";
+            margin = 5;
+            content = [
+              "            ███╗   ██╗██╗██╗  ██╗██╗   ██╗██╗███╗   ███╗"
+              "            ████╗  ██║██║╚██╗██╔╝██║   ██║██║████╗ ████║"
+              "            ██╔██╗ ██║██║ ╚███╔╝ ██║   ██║██║██╔████╔██║"
+              "            ██║╚██╗██║██║ ██╔██╗ ╚██╗ ██╔╝██║██║╚██╔╝██║"
+              "            ██║ ╚████║██║██╔╝ ██╗ ╚████╔╝ ██║██║ ╚═╝ ██║"
+              "            ╚═╝  ╚═══╝╚═╝╚═╝  ╚═╝  ╚═══╝  ╚═╝╚═╝     ╚═╝"
+            ];
+            highlight = "Statement";
+            defaultColor = "";
+            oldfilesAmount = 0;
+          };
+
+          body = {
+            type = "mapping";
+            oldfilesDirectory = false;
+            align = "center";
+            foldSection = false;
+            title = "Menu";
+            margin = 5;
+            content = [
+              [
+                " Find File"
+                "Telescope find_files"
+                "<leader>ff"
+              ]
+              [
+                "󰍉 Find Word"
+                "Telescope live_grep"
+                "<leader>gs"
+              ]
+              [
+                " Recent Files"
+                "Telescope oldfiles"
+                "<leader>s"
+              ]
+              [
+                " File Browser"
+                "Telescope file_browser"
+                "<leader>fe"
+              ]
+              [
+                "Exit"
+                "q!"
+                "q"
+              ]
+            ];
+            highlight = "string";
+            defaultColor = "";
+            oldfilesAmount = 0;
+          };
+        };
+        options = {
+          paddings = [1 3];
+        };
+
+        parts = [
+          "header"
+          "body"
+        ];
+      };
       fugitive.enable = true;
       gitsigns = {
         enable = true;
@@ -477,15 +554,9 @@
       };
       none-ls = {
         enable = true;
-        sources = {
-          formatting = {
-            goimports.enable = true;
-            gofmt.enable = true;
-          };
-          diagnostics = {
-            # buf.enable = true;
-            # golangci_lint.enable = true;
-          };
+        sources.formatting = {
+          goimports.enable = true;
+          gofmt.enable = true;
         };
       };
       mini = {
@@ -1309,25 +1380,8 @@
       };
       lint = {
         enable = true;
-        linters = {
-          buf_lint = {
-            append_fname = false;
-            args = ["--exclude-path .idea"];
-          };
-        };
         lintersByFt = {
           proto = ["buf_lint"];
-          nix = ["statix"];
-          lua = ["selene"];
-          javascript = ["eslint_d"];
-          javascriptreact = ["eslint_d"];
-          typescript = ["eslint_d"];
-          typescriptreact = ["eslint_d"];
-          json = ["jsonlint"];
-          java = ["checkstyle"];
-          go = [
-            "golangcilint"
-          ];
         };
       };
       lsp-format = {

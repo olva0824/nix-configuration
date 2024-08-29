@@ -33,6 +33,7 @@
         zig
         fzf
         ripgrep
+        delve #debug adapter for golang
         kubectl
         k9s
         git
@@ -50,6 +51,7 @@
         protoc-gen-go
         statix
         protoc-gen-js
+        pulumi
         bun
         nodejs_22
         # (pkgs.rustPlatform.buildRustPackage rec {  looks like it taking flit sources

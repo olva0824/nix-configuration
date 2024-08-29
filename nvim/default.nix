@@ -30,7 +30,12 @@
       {
         mode = "n";
         key = "<leader>uid";
-        action = "<cmd>:lua InsertUUID()<cr>";
+        action.__raw = ''
+          function()
+             local uuid = vim.fn.system("uuidgen"):gsub("\n", "")
+             vim.api.nvim_put({uuid}, "", true, true)
+          end
+        '';
         options = {
           desc = "Put UUID";
         };
@@ -386,10 +391,6 @@
     match.TODO = "TODO";
 
     extraConfigLua = ''
-      function InsertUUID()
-        local uuid = vim.fn.system("uuidgen"):gsub("\n", "")
-        vim.api.nvim_put({uuid}, "", true, true)
-      end
       require("telescope").setup{
         pickers = {
           colorscheme = {

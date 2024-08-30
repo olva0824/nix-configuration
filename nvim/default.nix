@@ -503,6 +503,7 @@
       scrolloff = 16;
       # timeoutlen = 10;
       list = true;
+      spell = true;
     };
     plugins = {
       markdown-preview.enable = true;
@@ -991,6 +992,10 @@
           };
         };
       };
+      cmp-spell = {
+        enable = true;
+      };
+      #
       wilder = {
         enable = true;
         modes = [":" "/" "?"];

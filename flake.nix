@@ -38,6 +38,7 @@
         k9s
         git
         lazygit
+        lazydocker
         golangci-lint
         hoppscotch
         tmuxPlugins.resurrect

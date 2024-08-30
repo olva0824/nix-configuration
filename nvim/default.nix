@@ -21,14 +21,6 @@
       }
       {
         mode = "n";
-        key = "<leader>cp";
-        action = "<cmd>MarkdownPreview<cr>";
-        options = {
-          desc = "Markdown Preview";
-        };
-      }
-      {
-        mode = "n";
         key = "<leader>uid";
         action.__raw = ''
           function()

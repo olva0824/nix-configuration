@@ -1222,7 +1222,41 @@
           };
         };
       };
-      lightline.enable = true;
+      lightline = {
+        enable = true;
+        settings = {
+          active = {
+            left = [
+              [
+                "mode"
+                "paste"
+              ]
+              [
+                "readonly"
+                "filename"
+                "modified"
+                "gitbranch"
+              ]
+            ];
+            right = [
+              [
+                "lineinfo"
+              ]
+              [
+                "percent"
+              ]
+              [
+                "fileformat"
+                "fileencoding"
+                "filetype"
+              ]
+            ];
+          };
+          component_function = {
+            gitbranch = "FugitiveHead";
+          };
+        };
+      };
 
       which-key = {
         enable = true;

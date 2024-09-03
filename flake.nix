@@ -30,6 +30,7 @@
       environment.systemPackages = with pkgs; [
         vim
         go
+        gofumpt
         zig
         fzf
         ripgrep

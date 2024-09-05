@@ -662,7 +662,7 @@
           formatting = {
             goimports.enable = true;
             gofmt.enable = true;
-            # buf.enable = true;
+            buf.enable = true;
             gofumpt.enable = true;
           };
           diagnostics = {

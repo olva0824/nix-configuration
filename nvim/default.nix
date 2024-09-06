@@ -382,6 +382,39 @@
           silent = true;
         };
       }
+      ### GIT signs
+      {
+        mode = "n";
+        key = "<leader>hs";
+        action = "<cmd>Gitsigns stage_hunk<cr>";
+        options = {
+          desc = "Stage hunk";
+        };
+      }
+      {
+        mode = "n";
+        key = "<leader>hr";
+        action = "<cmd>Gitsigns reset_hunk<cr>";
+        options = {
+          desc = "Reset hunk";
+        };
+      }
+      {
+        mode = "n";
+        key = "<leader>ph";
+        action = "<cmd>Gitsigns preview_hunk<cr>";
+        options = {
+          desc = "Preview hunk";
+        };
+      }
+      {
+        mode = "n";
+        key = "<leader>hdt";
+        action = "<cmd>Gitsigns diffthis<cr>";
+        options = {
+          desc = "Diff this";
+        };
+      }
     ];
     highlight.Todo = {
       fg = "Blue";
@@ -492,7 +525,7 @@
       cursorline = true;
       number = true;
       smartindent = true;
-      swapfile = true;
+      swapfile = false;
       breakindent = true;
       undofile = true;
       incsearch = true;
@@ -520,7 +553,13 @@
         keymaps = {
           next.key = "<TAB>";
           previous.key = "<S-TAB>";
-          close.key = "q<TAB>";
+          close = {
+            key = "q<TAB>";
+            action = "<Cmd>BufferClose!<CR>";
+          };
+          closeAllButCurrent = {
+            key = "Q<TAB>";
+          };
         };
       };
       bufferline.enable = true;
@@ -867,7 +906,7 @@
         keymapsSilent = true;
 
         keymaps = {
-          addFile = "<leader>a";
+          addFile = "<leader>ha";
           toggleQuickMenu = "<C-e>";
           navFile = {
             "1" = "<leader>1";
@@ -1342,10 +1381,6 @@
         keymaps = {
           silent = true;
           lspBuf = {
-            # "K" = {
-            #   action = "hover";
-            #   desc = "LSP: Hover Documentation";
-            # };
             "<leader>rn" = {
               action = "rename";
               desc = "LSP: [R]e[n]ame";
@@ -1566,7 +1601,7 @@
         enable = true;
         adapters = {
           go.enable = true;
-          # golang.enable = true;
+          golang.enable = true;
           java.enable = true;
           rust.enable = true;
           scala.enable = true;

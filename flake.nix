@@ -42,6 +42,7 @@
         lazydocker
         golangci-lint
         hoppscotch
+        tmux
         tmuxPlugins.resurrect
         tmuxPlugins.weather
         tmuxPlugins.cpu
@@ -81,8 +82,6 @@
       services.nix-daemon.enable = true;
       programs = {
         tmux = {
-          enable = true;
-
           # plugins = with pkgs; [
           #   tmuxPlugins.better-mouse-mode
           # ];

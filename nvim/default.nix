@@ -313,7 +313,7 @@
       {
         mode = "n";
         key = "<leader>tt";
-        action = "<cmd>lua require('neotest').run.run(vim.fn.expand '%')<CR>";
+        action = "<cmd>lua require('neotest').run.run(vim.fn.expand('%'))<CR>";
         options = {
           desc = "Run File";
           silent = true;
@@ -322,7 +322,7 @@
       {
         mode = "n";
         key = "<leader>tT";
-        action = "<cmd>lua require('neotest').run.run(vim.loop.cwd())<CR>";
+        action = "<cmd>lua require('neotest').run.run(vim.uv.cwd())<CR>";
         options = {
           desc = "Run All Test Files";
           silent = true;
@@ -545,6 +545,7 @@
       # timeoutlen = 10;
       list = true;
       spell = true;
+      spelllang = ["en"];
     };
     plugins = {
       markdown-preview.enable = true;
@@ -991,11 +992,6 @@
             # "<Tab>" = "cmp.mapping.select_next_item()";
             # "<S-Tab>" = "cmp.mapping.select_prev_item()";
 
-            # Manually trigger a completion from nvim-cmp.
-            #  Generally you don't need this, because nvim-cmp will display
-            #  completions whenever it has completion options available.
-            "<C-Space>" = "cmp.mapping.complete {}";
-
             # Think of <c-l> as moving to the right of your snippet expansion.
             #  So if you have a snippet that's like:
             #  function $name($args)
@@ -1019,6 +1015,7 @@
               end, { 'i', 's' })
             '';
             "<CR>" = "cmp.mapping.confirm({ select = true })";
+            "<S-CR>" = "cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace })";
           };
 
           sources = [
@@ -1519,7 +1516,7 @@
 
         servers = {
           nixd.enable = true;
-          nil-ls = {enable = true;};
+          # nil-ls = {enable = true;};
           gopls.enable = true;
           # bufls.enable = true;
           rust-analyzer = {
@@ -1600,9 +1597,13 @@
       neotest = {
         enable = true;
         adapters = {
-          go.enable = true;
-          golang.enable = true;
-          java.enable = true;
+          golang = {
+            enable = true;
+            settings = {
+              dap_go_enabled = true;
+            };
+          };
+          # java.enable = true;
           rust.enable = true;
           scala.enable = true;
           zig.enable = true;

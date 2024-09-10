@@ -25,6 +25,7 @@
         action.__raw = ''
           function()
              local uuid = vim.fn.system("uuidgen"):gsub("\n", "")
+             uuid = string.lower(uuid)
              vim.api.nvim_put({uuid}, "", true, true)
           end
         '';
@@ -1328,6 +1329,13 @@
         enable = true;
         nixvimInjections = true;
         grammarPackages = pkgs.vimPlugins.nvim-treesitter.allGrammars;
+        settings = {
+          ensure_installed = ["java" "go" "zig" "yaml" "rust" "lua" "toml" "nix" "javascript" "typescript" "python" "proto" "sql"];
+          highlight.enable = true;
+        };
+      };
+      otter = {
+        enable = true;
       };
       treesitter-context.enable = true;
       treesitter-refactor = {

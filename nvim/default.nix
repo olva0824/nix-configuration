@@ -425,9 +425,15 @@
 
     extraConfigLua = ''
       require("telescope").setup{
+        defaults = {
+            mappings = {}
+        },
         pickers = {
           colorscheme = {
             enable_preview = true
+          },
+          find_files = {
+             hidden = true
           }
         }
       }
@@ -456,15 +462,7 @@
       # used for completion, annotations, and signatures of Neovim apis
       neodev-nvim
       lazygit-nvim
-      (pkgs.vimUtils.buildVimPlugin {
-        name = "flit";
-        src = pkgs.fetchFromGitHub {
-          owner = "ggandor";
-          repo = "flit.nvim";
-          rev = "1ef72de6a02458d31b10039372c8a15ab8989e0d";
-          hash = "sha256-lLlad/kbrjwPE8ZdzebJMhA06AqpmEI+PJCWz12LYRM=";
-        };
-      })
+      flit-nvim
     ];
     extraConfigLuaPre =
       # lua
@@ -1095,13 +1093,6 @@
               desc = "[S]earch [K]eymaps";
             };
           };
-          "<leader>sf" = {
-            mode = "n";
-            action = "find_files";
-            options = {
-              desc = "[S]earch [F]iles";
-            };
-          };
           "<leader>ss" = {
             mode = "n";
             action = "builtin";
@@ -1134,7 +1125,7 @@
             mode = "n";
             action = "resume";
             options = {
-              desc = "[S]earch [R]esume";
+              desc = "[S]earch [ ]esume";
             };
           };
           "<leader>s" = {
@@ -1167,12 +1158,6 @@
             action = "find_files";
             options = {
               desc = "Find project files";
-            };
-          };
-          "<leader>fR" = {
-            action = "resume";
-            options = {
-              desc = "Resume";
             };
           };
           "<C-p>" = {
@@ -1607,6 +1592,7 @@
           zig.enable = true;
         };
         settings = {
+          log_level = "debug";
           output = {
             enabled = true;
             open_on_run = true;

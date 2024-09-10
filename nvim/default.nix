@@ -437,19 +437,7 @@
     match.TODO = "TODO";
 
     extraConfigLua = ''
-      require("telescope").setup{
-        defaults = {
-            mappings = {}
-        },
-        pickers = {
-          colorscheme = {
-            enable_preview = true
-          },
-          find_files = {
-             hidden = true
-          }
-        }
-      }
+
       require('cmp').event:on('confirm_done', require('nvim-autopairs.completion.cmp').on_confirm_done())
       require('dap').listeners.after.event_initialized['dapui_config'] = require('dapui').open
       require('dap').listeners.before.event_terminated['dapui_config'] = require('dapui').close
@@ -473,7 +461,7 @@
       # NOTE: This is how you would ad a vim plugin that is not implemented in Nixvim, also see extraConfigLuaPre below
       # `neodev` configure Lua LSP for your Neovim config, runtime and plugins
       # used for completion, annotations, and signatures of Neovim apis
-      neodev-nvim
+      # neodev-nvim
       lazygit-nvim
       flit-nvim
     ];
@@ -512,7 +500,7 @@
           bang = true,
         })
 
-        require('neodev').setup {}
+        -- require('neodev').setup {}
       '';
 
     globals = {
@@ -1062,6 +1050,14 @@
           keymaps = {
             "<C-r>" = "actions.refresh";
             "y." = "actions.copy_entry_path";
+            "g?" = "actions.show_help";
+            "<CR>" = "actions.select";
+            "<C-p>" = "actions.preview";
+            "<C-c>" = "actions.close";
+            "g." = "actions.toggle_hidden";
+            "-" = "actions.parent";
+            "_" = "actions.open_cwd";
+            "`" = "actions.cd";
           };
           view_options = {
             show_hidden = true;
@@ -1099,6 +1095,14 @@
               };
             };
             sorting_strategy = "ascending";
+          };
+          pickers = {
+            colorscheme = {
+              enable_preview = true;
+            };
+            find_files = {
+              hidden = true;
+            };
           };
         };
         keymaps = {
@@ -1329,9 +1333,11 @@
         enable = true;
         nixvimInjections = true;
         grammarPackages = pkgs.vimPlugins.nvim-treesitter.allGrammars;
+        nixGrammars = true;
         settings = {
-          ensure_installed = ["java" "go" "zig" "yaml" "rust" "lua" "toml" "nix" "javascript" "typescript" "python" "proto" "sql"];
+          # ensure_installed = ["java" "go" "zig" "yaml" "rust" "lua" "toml" "nix" "javascript" "typescript" "python" "proto" "sql"];
           highlight.enable = true;
+          auto_install = true;
         };
       };
       otter = {

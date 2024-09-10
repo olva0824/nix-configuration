@@ -59,7 +59,7 @@
         nodejs_22
         # (pkgs.rustPlatform.buildRustPackage rec {  looks like it taking flit sources
         #   pname = "protols";
-        #   version = "0.5.0";
+        #   version = "0.6.0";
         #   src = pkgs.fetchFromGitHub {
         #     owner = "coder3101";
         #     repo = "protols";

@@ -77,14 +77,6 @@
         action = "<cmd>Oil<cr>";
         options = {desc = "Open file tree";};
       }
-
-      {
-        mode = "n";
-        key = "<leader>sd";
-        action = "<cmd>Telescope diagnostics bufnr=0<cr>";
-        options = {
-        };
-      }
       {
         mode = "n";
         key = "<leader>fe";
@@ -309,6 +301,7 @@
           desc = "Eval";
         };
       }
+
       #TESTS
       {
         mode = "n";
@@ -380,6 +373,25 @@
         options = {
           desc = "Stop";
           silent = true;
+        };
+      }
+      {
+        mode = "n";
+        key = "<leader>tb";
+        action.__raw = ''
+          function()
+           require('dap').run({
+             type = "go",
+             name = "TestAllSuites",
+             request = "launch",
+             mode = "test",
+             program = "./tests",
+             args = { "-test.run", "TestAllSuites", "-godog.tags", "@wip"},
+           })
+           end
+        '';
+        options = {
+          desc = "Debug bdd test";
         };
       }
       ### GIT signs
@@ -704,7 +716,7 @@
             gofumpt.enable = true;
           };
           diagnostics = {
-            buf.enable = true;
+            # buf.enable = true;
             # golangci_lint.enable = true;
           };
         };
@@ -1067,6 +1079,16 @@
           fzf-native = {
             enable = true;
           };
+          ui-select = {
+            settings = {
+              specific_opts = {
+                codeactions = true;
+              };
+            };
+          };
+          undo = {
+            enable = true;
+          };
         };
         settings = {
           defaults = {
@@ -1304,8 +1326,19 @@
       };
       treesitter = {
         enable = true;
-        settings.ensure_installed = ["java" "go" "zig" "yaml" "rust" "lua" "toml" "nix" "javascript" "typescript" "python" "proto"];
+        nixvimInjections = true;
+        grammarPackages = pkgs.vimPlugins.nvim-treesitter.allGrammars;
       };
+      treesitter-context.enable = true;
+      treesitter-refactor = {
+        enable = true;
+        highlightDefinitions = {
+          enable = true;
+          # Set to false if you have an `updatetime` of ~100.
+          clearOnCursorMove = false;
+        };
+      };
+      hmts.enable = true;
       treesitter-textobjects = {
         enable = false;
         select = {
@@ -1507,6 +1540,7 @@
             installCargo = true;
             installRustc = true;
           };
+          sqls.enable = true;
           tsserver = {
             enable = false;
             filetypes = ["javascript" "javascriptreact" "typescript" "typescriptreact"];
@@ -1593,9 +1627,9 @@
         };
         settings = {
           log_level = "debug";
+          diagnostic.severity = "info";
           output = {
             enabled = true;
-            open_on_run = true;
           };
           output_panel = {
             enabled = true;

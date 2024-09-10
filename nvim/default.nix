@@ -919,7 +919,6 @@
       };
       leap = {
         enable = true;
-        #highlightUnlabeledPhaseOneTargets = true;
       };
       floaterm = {
         enable = true;
@@ -1015,7 +1014,6 @@
               end, { 'i', 's' })
             '';
             "<CR>" = "cmp.mapping.confirm({ select = true })";
-            "<S-CR>" = "cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace })";
           };
 
           sources = [

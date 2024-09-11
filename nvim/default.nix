@@ -544,7 +544,7 @@
       # timeoutlen = 10;
       list = true;
       spell = true;
-      spelllang = ["en"];
+      spelllang = ["en_us"];
     };
     plugins = {
       markdown-preview.enable = true;
@@ -571,7 +571,7 @@
         autoSession.enabled = true;
       };
 
-      noice.enable = true;
+      noice.enable = true; # think do I really need it
       fugitive.enable = true;
       gitsigns = {
         enable = true;
@@ -599,6 +599,7 @@
         };
       };
       fidget = {
+        #TODO do I really need it
         enable = true;
         logger = {
           level = "warn"; # “off”, “error”, “warn”, “info”, “debug”, “trace”
@@ -733,41 +734,6 @@
               highlight = "gsh"; # -- Highlight surrounding
               replace = "gsr"; # -- Replace surrounding
               update_n_lines = "gsn"; # -- Update `n_lines`
-            };
-          };
-        };
-      };
-      neo-tree = {
-        enable = true;
-        sources = ["filesystem" "buffers" "git_status" "document_symbols"];
-        addBlankLineAtTop = false;
-
-        filesystem = {
-          bindToCwd = false;
-          followCurrentFile = {
-            enabled = true;
-          };
-        };
-
-        defaultComponentConfigs = {
-          indent = {
-            withExpanders = true;
-            expanderCollapsed = "";
-            expanderExpanded = " ";
-            expanderHighlight = "NeoTreeExpander";
-          };
-
-          gitStatus = {
-            symbols = {
-              added = " ";
-              conflict = "󰩌 ";
-              deleted = "󱂥";
-              ignored = " ";
-              modified = " ";
-              renamed = "󰑕";
-              staged = "󰩍";
-              unstaged = "";
-              untracked = "";
             };
           };
         };
@@ -1354,7 +1320,7 @@
       };
       hmts.enable = true;
       treesitter-textobjects = {
-        enable = false;
+        enable = true;
         select = {
           enable = true;
           lookahead = true;
@@ -1547,7 +1513,43 @@
         servers = {
           nixd.enable = true;
           # nil-ls = {enable = true;};
-          gopls.enable = true;
+          gopls = {
+            enable = true;
+
+            settings = {
+              gopls = {
+                gofumpt = true;
+                codelenses = {
+                  gc_details = false;
+                  generate = true;
+                  test = true;
+                  tidy = true;
+                  upgrade_dependency = true;
+                };
+                analyses = {
+                  fieldalignment = true;
+                  nilness = true;
+                  unusedparams = true;
+                  unusedwrite = true;
+                  useany = true;
+                };
+                hints = {
+                  # assignVariableTypes = true;
+                  # functionTypeParameters = true;
+                  compositeLiteralFields = true;
+                  compositeLiteralTypes = true;
+                  constantValues = true;
+                  # parameterNames = true;
+                  rageVariableTypes = true;
+                };
+                usePlaceholders = true;
+                experimentalPostfixCompletions = true;
+                completeUnimported = true;
+                staticcheck = true;
+                # semanticTokens = true;
+              };
+            };
+          };
           # bufls.enable = true;
           rust-analyzer = {
             enable = true;
@@ -1593,6 +1595,7 @@
         };
       };
       lint = {
+        #TODO consoder using it
         enable = true;
         linters = {
           buf_lint = {
@@ -1616,6 +1619,7 @@
         };
       };
       lsp-format = {
+        #TODO consider using it
         enable = true;
       };
       lsp-status.enable = true;

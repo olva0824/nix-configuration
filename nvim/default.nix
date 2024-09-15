@@ -423,9 +423,25 @@
       {
         mode = "n";
         key = "<leader>hdt";
-        action = "<cmd>Gitsigns diffthis<cr>";
+        action = "<cmd>Gvdiffsplit!<cr>";
         options = {
           desc = "Diff this";
+        };
+      }
+      {
+        mode = "n";
+        key = "ga";
+        action = "<cmd>diffget //2<cr>";
+        options = {
+          desc = "Accept left";
+        };
+      }
+      {
+        mode = "n";
+        key = "gl";
+        action = "<cmd>diffget //3<cr>";
+        options = {
+          desc = "Accept right";
         };
       }
     ];
@@ -437,7 +453,30 @@
     match.TODO = "TODO";
 
     extraConfigLua = ''
-
+      vim.keymap.set("n", "<C-a>", function()
+          require("dial.map").manipulate("increment", "normal")
+      end)
+      vim.keymap.set("n", "<C-x>", function()
+          require("dial.map").manipulate("decrement", "normal")
+      end)
+      vim.keymap.set("n", "g<C-a>", function()
+          require("dial.map").manipulate("increment", "gnormal")
+      end)
+      vim.keymap.set("n", "g<C-x>", function()
+          require("dial.map").manipulate("decrement", "gnormal")
+      end)
+      vim.keymap.set("v", "<C-a>", function()
+          require("dial.map").manipulate("increment", "visual")
+      end)
+      vim.keymap.set("v", "<C-x>", function()
+          require("dial.map").manipulate("decrement", "visual")
+      end)
+      vim.keymap.set("v", "g<C-a>", function()
+          require("dial.map").manipulate("increment", "gvisual")
+      end)
+      vim.keymap.set("v", "g<C-x>", function()
+          require("dial.map").manipulate("decrement", "gvisual")
+      end)
       require('cmp').event:on('confirm_done', require('nvim-autopairs.completion.cmp').on_confirm_done())
       require('dap').listeners.after.event_initialized['dapui_config'] = require('dapui').open
       require('dap').listeners.before.event_terminated['dapui_config'] = require('dapui').close
@@ -464,6 +503,7 @@
       # neodev-nvim
       lazygit-nvim
       flit-nvim
+      dial-nvim
     ];
     extraConfigLuaPre =
       # lua
@@ -547,6 +587,10 @@
       spelllang = ["en_us"];
     };
     plugins = {
+      refactoring = {
+        enable = true;
+        enableTelescope = true;
+      };
       markdown-preview.enable = true;
       barbar = {
         enable = true;
@@ -1318,6 +1362,10 @@
           clearOnCursorMove = false;
         };
       };
+      yanky = {
+        enable = true;
+        enableTelescope = true;
+      };
       hmts.enable = true;
       treesitter-textobjects = {
         enable = true;
@@ -1542,8 +1590,8 @@
                   # parameterNames = true;
                   rageVariableTypes = true;
                 };
-                usePlaceholders = true;
-                experimentalPostfixCompletions = true;
+                # usePlaceholders = true;
+                # experimentalPostfixCompletions = true;
                 completeUnimported = true;
                 staticcheck = true;
                 # semanticTokens = true;

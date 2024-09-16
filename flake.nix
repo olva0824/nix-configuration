@@ -39,6 +39,7 @@
         k9s
         git
         lazygit
+        python3
         lazydocker
         golangci-lint
         hoppscotch
@@ -50,6 +51,7 @@
         buf
         cargo
         rustc
+        starship
         protobuf_27
         protoc-gen-go
         statix
@@ -83,9 +85,13 @@
       programs = {
         tmux = {
           # plugins = with pkgs; [
+          #   tmuxPlugins.resurrect
+          #   tmuxPlugins.weather
+          #   tmuxPlugins.cpu
           #   tmuxPlugins.better-mouse-mode
           # ];
           extraConfig = ''
+            set -g @plugin 'tmux-plugin/tpm'
             # https://old.reddit.com/r/tmux/comments/mesrci/tmux_2_doesnt_seem_to_use_256_colors/
             set -g default-terminal "xterm-256color"
             set -ga terminal-overrides ",*256col*:Tc"
@@ -98,6 +104,7 @@
             #bind | split-window -h -c "#{pane_current_path}"
             #bind - split-window -v -c "#{pane_current_path}"
             #bind c new-window -c "#{pane_current_path}"
+            run ~'/.tmux/plugins/tpm/tpm'
           '';
         };
         zsh.enable = true;
@@ -115,15 +122,20 @@
       # programs.fish.enable = true;
 
       # Set Git commit hash for darwin-version.
-      system.configurationRevision = self.rev or self.dirtyRev or null;
-      system.defaults = {
-        dock.autohide = true;
-        dock.mru-spaces = false;
+      system = {
+        defaults = {
+          dock = {
+            mru-spaces = false;
+            autohide = true;
+          };
+        };
+        stateVersion = 4;
+        configurationRevision = self.rev or self.dirtyRev or null;
       };
+
       #
       # Used for backwards compatibility, please read the changelog before changing.
       # $ darwin-rebuild changelog
-      system.stateVersion = 4;
 
       # homebrew.enable = true;
       # homebrew.casks = [

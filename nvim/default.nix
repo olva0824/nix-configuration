@@ -7,6 +7,18 @@
   ];
 
   programs.nixvim = {
+    autoCmd = [
+      {
+        command = "echo 'Entering a '";
+        event = [
+          "BufEnter"
+          "BufWinEnter"
+        ];
+        pattern = [
+          "*.feature"
+        ];
+      }
+    ];
     keymaps = [
       # Press 'H', 'L' to jump to start/end of a line (first/last character)
       {
@@ -570,7 +582,6 @@
       incsearch = true;
       ignorecase = true;
       colorcolumn = "135";
-      # termguicolors = true; now it resolves automaticly
       tabstop = 4;
       shiftwidth = 4;
       expandtab = true;
@@ -587,6 +598,7 @@
       spelllang = ["en_us"];
     };
     plugins = {
+      web-devicons.enable = true;
       refactoring = {
         enable = true;
         enableTelescope = true;
@@ -1110,8 +1122,11 @@
             colorscheme = {
               enable_preview = true;
             };
-            find_files = {
-              hidden = true;
+            live_grep = {
+              additional_args = ''                function(_)
+                                        return { "--hidden" }
+                                    end
+              '';
             };
           };
         };
@@ -1352,6 +1367,9 @@
       };
       otter = {
         enable = true;
+        settings = {
+          handle_leading_whitespace = true;
+        };
       };
       treesitter-context.enable = true;
       treesitter-refactor = {
@@ -1561,6 +1579,7 @@
         servers = {
           nixd.enable = true;
           # nil-ls = {enable = true;};
+          jsonls.enable = true;
           gopls = {
             enable = true;
 
@@ -1569,6 +1588,7 @@
                 gofumpt = true;
                 codelenses = {
                   gc_details = false;
+                  run_govulncheck = true;
                   generate = true;
                   test = true;
                   tidy = true;
@@ -1604,8 +1624,18 @@
             installCargo = true;
             installRustc = true;
           };
-          sqls.enable = true;
-          tsserver = {
+          sqls = {
+            enable = true;
+            settings = {
+              connections = [
+                {
+                  driver = "postgresql";
+                  dataSourceName = "host=127.0.0.1 port=5432 user=backend password=12345 dbname=backend sslmode=disable";
+                }
+              ];
+            };
+          };
+          ts-ls = {
             enable = false;
             filetypes = ["javascript" "javascriptreact" "typescript" "typescriptreact"];
             extraOptions = {
@@ -1640,6 +1670,7 @@
           metals.enable = true;
           terraformls.enable = true;
           pyright.enable = true;
+          yamlls.enable = true;
         };
       };
       lint = {

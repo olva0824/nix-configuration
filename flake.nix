@@ -120,7 +120,7 @@
 
       # Create /etc/zshrc that loads the nix-darwin environment.
       # programs.fish.enable = true;
-
+      ids.uids.nixbld = 300;
       # Set Git commit hash for darwin-version.
       system = {
         defaults = {

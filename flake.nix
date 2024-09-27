@@ -57,6 +57,7 @@
         statix
         protoc-gen-js
         pulumi
+        pulumiPackages.pulumi-language-go
         bun
         nodejs_22
         # (pkgs.rustPlatform.buildRustPackage rec {  looks like it taking flit sources

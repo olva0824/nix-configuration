@@ -622,9 +622,11 @@
       undotree.enable = true;
       auto-session = {
         enable = true;
-        autoRestore.enabled = true;
-        autoSave.enabled = true;
-        autoSession.enabled = true;
+        settings = {
+          enabled = true;
+          auto_restore = true;
+          auto_save = true;
+        };
       };
 
       noice.enable = true; # think do I really need it
@@ -1619,7 +1621,7 @@
             };
           };
           # bufls.enable = true;
-          rust-analyzer = {
+          rust_analyzer = {
             enable = true;
             installCargo = true;
             installRustc = true;
@@ -1635,8 +1637,8 @@
               ];
             };
           };
-          ts-ls = {
-            enable = false;
+          ts_ls = {
+            enable = true;
             filetypes = ["javascript" "javascriptreact" "typescript" "typescriptreact"];
             extraOptions = {
               settings = {

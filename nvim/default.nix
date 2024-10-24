@@ -610,7 +610,7 @@
           next.key = "<TAB>";
           previous.key = "<S-TAB>";
           close = {
-            key = "q<TAB>";
+            key = "x<TAB>";
             action = "<Cmd>BufferClose!<CR>";
           };
           closeAllButCurrent = {

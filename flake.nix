@@ -29,7 +29,7 @@
       # $ nix-env -qaP | grep wget
       environment.systemPackages = with pkgs; [
         vim
-        go
+        go_1_23
         gofumpt
         zig
         fzf

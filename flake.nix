@@ -29,7 +29,7 @@
       # $ nix-env -qaP | grep wget
       environment.systemPackages = with pkgs; [
         vim
-        go_1_23
+        go
         gofumpt
         zig
         fzf
@@ -42,6 +42,8 @@
         python3
         lazydocker
         golangci-lint
+        d2
+        mermaid-cli
         hoppscotch
         tmux
         tmuxPlugins.resurrect
@@ -55,8 +57,7 @@
         protobuf_27
         protoc-gen-go
         statix
-        pulumi
-        pulumiPackages.pulumi-language-go
+        pulumi-bin
         ollama
         atuin
         btop
@@ -95,12 +96,15 @@
           #   tmuxPlugins.better-mouse-mode
           # ];
           extraConfig = ''
-            set -g @plugin 'tmux-plugin/tpm'
+            resurrect_dir=${pkgs.tmuxPlugins.cpu}
+            set -g @resurrect-dir $resurrect_dir
+            set -g @resurrect-hook-post-save-all 'target=$(readlink -f $resurrect_dir/last); sed "s| --cmd .*-vim-pack-dir||g; s|/etc/profiles/per-user/$USER/bin/||g; s|/home/$USER/.nix-profile/bin/||g" $target | sponge $target'
             # https://old.reddit.com/r/tmux/comments/mesrci/tmux_2_doesnt_seem_to_use_256_colors/
             set -g default-terminal "xterm-256color"
             set -ga terminal-overrides ",*256col*:Tc"
             set -ga terminal-overrides '*:Ss=\E[%p1%d q:Se=\E[ q'
-            set-environment -g COLORTERM "truecolor"
+
+            set -gq allow-passthrough on
 
             # Mouse works as expected
             set-option -g mouse on
@@ -108,7 +112,6 @@
             #bind | split-window -h -c "#{pane_current_path}"
             #bind - split-window -v -c "#{pane_current_path}"
             #bind c new-window -c "#{pane_current_path}"
-            run ~'/.tmux/plugins/tpm/tpm'
           '';
         };
         zsh.enable = true;
@@ -124,7 +127,7 @@
 
       # Create /etc/zshrc that loads the nix-darwin environment.
       # programs.fish.enable = true;
-      ids.uids.nixbld = 300;
+      ids.uids.nixbld = 350;
       # Set Git commit hash for darwin-version.
       system = {
         defaults = {

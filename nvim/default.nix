@@ -2,14 +2,25 @@
   lib,
   pkgs,
   ...
-}: {
+}: let
+  fromGitHub = rev: ref: repo:
+    pkgs.vimUtils.buildVimPlugin {
+      pname = "${lib.strings.sanitizeDerivationName repo}";
+      version = ref;
+      src = builtins.fetchGit {
+        url = "https://github.com/${repo}.git";
+        ref = ref;
+        rev = rev;
+      };
+    };
+in {
   imports = [
   ];
 
   programs.nixvim = {
     autoCmd = [
       {
-        command = "echo 'Entering a '";
+        command = "setlocal tabstop=2 shiftwidth=2";
         event = [
           "BufEnter"
           "BufWinEnter"
@@ -493,7 +504,6 @@
       require('dap').listeners.after.event_initialized['dapui_config'] = require('dapui').open
       require('dap').listeners.before.event_terminated['dapui_config'] = require('dapui').close
       require('dap').listeners.before.event_exited['dapui_config'] = require('dapui').close
-      require("telescope").load_extension("lazygit")
       vim.api.nvim_set_hl(0, 'LeapBackdrop', { link = 'Comment' })
       require('flit').setup {
       keys = { f = 'f', F = 'F', t = 't', T = 'T' },
@@ -507,13 +517,13 @@
       opts = {}
       }
       require'lspconfig'.protols.setup{}
+
     '';
     extraPlugins = with pkgs.vimPlugins; [
       # NOTE: This is how you would ad a vim plugin that is not implemented in Nixvim, also see extraConfigLuaPre below
       # `neodev` configure Lua LSP for your Neovim config, runtime and plugins
       # used for completion, annotations, and signatures of Neovim apis
-      # neodev-nvim
-      lazygit-nvim
+      neodev-nvim
       flit-nvim
       dial-nvim
     ];
@@ -559,7 +569,6 @@
       mapleader = " ";
       maplocalleader = " ";
     };
-    opts.completeopt = ["menu" "menuone" "noselect"];
     clipboard = {
       register = "unnamedplus";
       providers.wl-copy.enable = true;
@@ -570,6 +579,7 @@
       settings.flavour = "mocha";
     };
     opts = {
+      completeopt = ["menu" "menuone" "noselect"];
       updatetime = 10;
       relativenumber = true;
       wrap = true;
@@ -599,10 +609,6 @@
     };
     plugins = {
       web-devicons.enable = true;
-      refactoring = {
-        enable = true;
-        enableTelescope = true;
-      };
       markdown-preview.enable = true;
       barbar = {
         enable = true;
@@ -614,7 +620,7 @@
             action = "<Cmd>BufferClose!<CR>";
           };
           closeAllButCurrent = {
-            key = "Q<TAB>";
+            key = "X<TAB>";
           };
         };
       };
@@ -628,7 +634,7 @@
           auto_save = true;
         };
       };
-
+      lazygit.enable = true;
       noice.enable = true; # think do I really need it
       fugitive.enable = true;
       gitsigns = {
@@ -760,7 +766,7 @@
           formatting = {
             goimports.enable = true;
             gofmt.enable = true;
-            buf.enable = true;
+            # buf.enable = true;
             gofumpt.enable = true;
           };
           diagnostics = {
@@ -845,13 +851,7 @@
                 "prettier"
               ]
             ];
-            # javascript = [
-            #   [
-            #     "prettierd"
-            #     "prettier"
-            #   ]
-            # ];
-            go = ["gofmt" "goimports"];
+            # go = ["gofmt" "goimports"];
             typescript = [
               [
                 "prettierd"
@@ -1125,9 +1125,10 @@
               enable_preview = true;
             };
             live_grep = {
-              additional_args = ''                function(_)
-                                        return { "--hidden" }
-                                    end
+              additional_args = ''
+                function(_)
+                  return { "--hidden" }
+                 end
               '';
             };
           };
@@ -1182,7 +1183,7 @@
               desc = "[S]earch [ ]esume";
             };
           };
-          "<leader>s" = {
+          "<leader>sf" = {
             mode = "n";
             action = "oldfiles";
             options = {

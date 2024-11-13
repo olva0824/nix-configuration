@@ -39,7 +39,13 @@
         k9s
         git
         lazygit
-        python3
+        (
+          python313.withPackages (python-pkgs:
+            with python-pkgs; [
+              # select Python packages here
+              pip
+            ])
+        )
         lazydocker
         golangci-lint
         d2
@@ -53,7 +59,6 @@
         buf
         cargo
         rustc
-        starship
         protobuf_27
         protoc-gen-go
         statix
@@ -80,6 +85,7 @@
         #   };
         # })
       ];
+
       imports = [
         nixvim.nixDarwinModules.nixvim
         ./nvim
@@ -144,12 +150,6 @@
       # Used for backwards compatibility, please read the changelog before changing.
       # $ darwin-rebuild changelog
 
-      # homebrew.enable = true;
-      # homebrew.casks = [
-      #   "zed"
-      # ];
-      # homebrew.brews = [
-      # ];
       # The platform the configuration will be used on.
       nixpkgs.hostPlatform = "aarch64-darwin";
 

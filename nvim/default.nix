@@ -88,6 +88,14 @@ in {
         };
       }
       {
+        mode = "n";
+        key = "<leader>fmt";
+        action = "<cmd>!ghokin fmt replace .<CR>";
+        options = {
+          desc = "Reformat";
+        };
+      }
+      {
         mode = ["n"];
         key = "<leader>glb";
         action = "<cmd>Gitsigns toggle_current_line_blame<CR>";
@@ -1580,6 +1588,10 @@ in {
         '';
 
         servers = {
+          cucumber_language_server = {
+            enable = true;
+            package = null;
+          };
           nixd.enable = true;
           # nil-ls = {enable = true;};
           jsonls.enable = true;

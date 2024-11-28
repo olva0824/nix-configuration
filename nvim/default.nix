@@ -624,11 +624,11 @@ in {
           next.key = "<TAB>";
           previous.key = "<S-TAB>";
           close = {
-            key = "x<TAB>";
+            key = "d<TAB>";
             action = "<Cmd>BufferClose!<CR>";
           };
           closeAllButCurrent = {
-            key = "X<TAB>";
+            key = "D<TAB>";
           };
         };
       };
@@ -645,6 +645,10 @@ in {
       lazygit.enable = true;
       noice.enable = true; # think do I really need it
       fugitive.enable = true;
+      ollama = {
+        enable = true;
+        model = "qwen2.5-coder:14b";
+      };
       gitsigns = {
         enable = true;
         settings = {

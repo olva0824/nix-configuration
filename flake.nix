@@ -124,7 +124,7 @@
         nixvim.enable = true;
       };
       fonts.packages = with pkgs; [
-        (nerdfonts.override {fonts = ["Mononoki"];})
+        nerd-fonts.mononoki
       ];
       # nix.package = pkgs.nix;
 

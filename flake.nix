@@ -38,7 +38,9 @@
         kubectl
         k9s
         git
+        redli
         lazygit
+        libiconv
         (
           python313.withPackages (python-pkgs:
             with python-pkgs; [

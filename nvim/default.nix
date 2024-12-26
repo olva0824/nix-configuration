@@ -461,6 +461,21 @@ in {
       }
       {
         mode = "n";
+        key = "<leader>glh";
+        action.__raw = ''
+          function()
+             local file = vim.fn.expand('%:p')
+             local line = vim.fn.line('.')
+             local cmd = string.format('Git log -L %d,%d:%s', line, line, file)
+             vim.cmd(cmd)
+           end
+        '';
+        options = {
+          desc = "Line history";
+        };
+      }
+      {
+        mode = "n";
         key = "ga";
         action = "<cmd>diffget //2<cr>";
         options = {
@@ -648,6 +663,12 @@ in {
       ollama = {
         enable = true;
         model = "qwen2.5-coder:14b";
+        prompts = {
+          generate_buffer = {
+            prompt = "For next code $buf. Generate $ftype code that does the following: $input\n\n. Respond EXACTLY in this format:\n```$ftype\n<your code>\n```";
+            action = "insert";
+          };
+        };
       };
       gitsigns = {
         enable = true;
@@ -960,10 +981,11 @@ in {
       };
       floaterm = {
         enable = true;
-        width = 0.8;
-        height = 0.8;
-
-        title = "ft";
+        settings = {
+          width = 0.8;
+          height = 0.8;
+          title = "ft";
+        };
       };
       luasnip.enable = true;
       lspkind = {

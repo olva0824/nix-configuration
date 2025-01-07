@@ -660,13 +660,50 @@ in {
       lazygit.enable = true;
       noice.enable = true; # think do I really need it
       fugitive.enable = true;
-      ollama = {
+      git-worktree = {
         enable = true;
-        model = "qwen2.5-coder:14b";
-        prompts = {
-          generate_buffer = {
-            prompt = "For next code $buf. Generate $ftype code that does the following: $input\n\n. Respond EXACTLY in this format:\n```$ftype\n<your code>\n```";
-            action = "insert";
+        enableTelescope = true;
+      };
+      codecompanion = {
+        enable = true;
+        settings = {
+          adapters = {
+            ollama = {
+              __raw = ''
+                function()
+                  return require('codecompanion.adapters').extend('ollama', {
+                      env = {
+                          url = "http://127.0.0.1:11434",
+                      },
+                      schema = {
+                          model = {
+                              default = 'qwen2.5-coder:14b',
+                          },
+                         -- num_ctx = {
+                          --     default = 32768,
+                          -- },
+                      },
+                  })
+                end
+              '';
+            };
+          };
+          opts = {
+            log_level = "TRACE";
+            send_code = true;
+            use_default_actions = true;
+            use_default_prompts = true;
+          };
+          strategies = {
+            agent = {
+              adapter = "ollama";
+            };
+            chat = {
+              adapter = "ollama";
+            };
+            inline = {
+              adapter = "ollama";
+            };
           };
         };
       };

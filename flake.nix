@@ -39,6 +39,7 @@
         k9s
         git
         redli
+        redis-plus-plus
         lazygit
         libiconv
         (

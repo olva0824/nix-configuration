@@ -43,7 +43,7 @@ in {
         action = "^";
       }
       {
-        mode = "n";
+        mode = ["n" "v"];
         key = "<leader>uid";
         action.__raw = ''
           function()
@@ -853,7 +853,7 @@ in {
           formatting = {
             goimports.enable = true;
             gofmt.enable = true;
-            # buf.enable = true;
+            buf.enable = true;
             gofumpt.enable = true;
           };
           diagnostics = {

@@ -55,9 +55,6 @@
         mermaid-cli
         hoppscotch
         tmux
-        tmuxPlugins.resurrect
-        tmuxPlugins.weather
-        tmuxPlugins.cpu
         dbeaver-bin
         buf
         cargo
@@ -72,6 +69,7 @@
         bat
         bun
         nodejs_22
+        sqls
         # (pkgs.rustPlatform.buildRustPackage rec {  looks like it taking flit sources
         #   pname = "protols";
         #   version = "0.6.0";

@@ -506,6 +506,22 @@ in {
           desc = "Worktree create";
         };
       }
+      {
+        mode = ["n" "v"];
+        key = "<leader>ca";
+        action = "<cmd>Lspsaga code_action<cr>";
+        options = {
+          desc = "Code actions";
+        };
+      }
+      {
+        mode = "n";
+        key = "<leader>rn";
+        action = "<cmd>Lspsaga rename<cr>";
+        options = {
+          desc = "Rename";
+        };
+      }
     ];
     highlight.Todo = {
       fg = "Blue";
@@ -855,6 +871,7 @@ in {
             gofmt.enable = true;
             buf.enable = true;
             gofumpt.enable = true;
+            alejandra.enable = true;
           };
           diagnostics = {
             # buf.enable = true;
@@ -890,7 +907,7 @@ in {
         };
       };
       conform-nvim = {
-        enable = true;
+        enable = false;
         settings = {
           format_on_save = ''
             function(bufnr)
@@ -1056,6 +1073,13 @@ in {
             neorg = "[neorg]";
             cmp_tabby = "[Tabby]";
           };
+        };
+      };
+      lspsaga = {
+        enable = true;
+        rename.autoSave = true;
+        lightbulb = {
+          debounce = 200;
         };
       };
       cmp-nvim-lsp.enable = true;
@@ -1533,16 +1557,6 @@ in {
         inlayHints = true;
         keymaps = {
           silent = true;
-          lspBuf = {
-            "<leader>rn" = {
-              action = "rename";
-              desc = "LSP: [R]e[n]ame";
-            };
-            "<leader>ca" = {
-              action = "code_action";
-              desc = "LSP: [C]ode [A]ction";
-            };
-          };
           diagnostic = {
             "<leader>cd" = {
               action = "open_float";
@@ -1853,38 +1867,35 @@ in {
             texthl = "DapLogPoint";
           };
         };
-        extensions = {
-          # Creates a beautiful debugger UI
-          dap-ui = {
-            enable = true;
+      };
+      dap-go = {
+        enable = true;
+      };
+      dap-ui = {
+        enable = true;
 
-            # Set icons to characters that are more likely to work in every terminal.
-            # Feel free to remove or use ones that you like more! :)
-            # Don't feel like these are good choices.
-            icons = {
-              expanded = "▾";
-              collapsed = "▸";
-              current_frame = "*";
-            };
-
-            controls = {
-              icons = {
-                pause = "⏸";
-                play = "▶";
-                step_into = "⏎";
-                step_over = "⏭";
-                step_out = "⏮";
-                step_back = "b";
-                run_last = "▶▶";
-                terminate = "⏹";
-                disconnect = "⏏";
-              };
-            };
+        # Set icons to characters that are more likely to work in every terminal.
+        # Feel free to remove or use ones that you like more! :)
+        # Don't feel like these are good choices.
+        settings = {
+          icons = {
+            expanded = "▾";
+            collapsed = "▸";
+            current_frame = "*";
           };
 
-          # Add your own debuggers here
-          dap-go = {
-            enable = true;
+          controls = {
+            icons = {
+              pause = "⏸";
+              play = "▶";
+              step_into = "⏎";
+              step_over = "⏭";
+              step_out = "⏮";
+              step_back = "b";
+              run_last = "▶▶";
+              terminate = "⏹";
+              disconnect = "⏏";
+            };
           };
         };
       };

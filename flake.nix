@@ -90,6 +90,28 @@
       imports = [
         nixvim.nixDarwinModules.nixvim
         ./nvim
+        home-manager.darwinModules.home-manager
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          # home-manager.users.jdoe = import ./home.nix;
+
+          # home-manager.users.user = {pkgs, ...}: {
+          #   home.stateVersion = "24.11";
+          #   # home.homeDirectory = "/Users/user/";
+          #   programs = {
+          #     tmux = {
+          #       enable = true;
+          #       plugins = [
+          #         pkgs.tmuxPlugins.resurrect
+          #       ];
+          #     };
+          #   };
+          # };
+
+          # Optionally, use home-manager.extraSpecialArgs to pass
+          # arguments to home.nix
+        }
       ];
 
       # Auto upgrade nix package and the daemon service.
@@ -121,7 +143,9 @@
             #bind c new-window -c "#{pane_current_path}"
           '';
         };
-        zsh.enable = true;
+        zsh = {
+          enable = true;
+        };
         nixvim.enable = true;
       };
       fonts.packages = with pkgs; [

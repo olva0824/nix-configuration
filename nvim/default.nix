@@ -73,7 +73,7 @@ in {
       {
         mode = ["n" "t"];
         key = "<C-n>";
-        action = "<cmd>FloatermToggle<cr>";
+        action = "<cmd>Lspsaga term_toggle<cr>";
         options = {
           silent = true;
           desc = "Terminal";
@@ -1050,14 +1050,6 @@ in {
       leap = {
         enable = true;
       };
-      floaterm = {
-        enable = true;
-        settings = {
-          width = 0.8;
-          height = 0.8;
-          title = "ft";
-        };
-      };
       luasnip.enable = true;
       lspkind = {
         enable = true;
@@ -1079,7 +1071,8 @@ in {
         enable = true;
         rename.autoSave = true;
         lightbulb = {
-          debounce = 200;
+          debounce = 500;
+          sign = false;
         };
       };
       cmp-nvim-lsp.enable = true;

@@ -114,8 +114,8 @@
         }
       ];
 
+      nix.enable = true;
       # Auto upgrade nix package and the daemon service.
-      services.nix-daemon.enable = true;
       programs = {
         tmux = {
           # plugins = with pkgs; [

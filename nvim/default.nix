@@ -1707,7 +1707,7 @@ in {
                   useany = true;
                 };
                 hints = {
-                  # assignVariableTypes = true;
+                  assignVariableTypes = true;
                   # functionTypeParameters = true;
                   compositeLiteralFields = true;
                   compositeLiteralTypes = true;

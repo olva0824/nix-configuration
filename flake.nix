@@ -70,6 +70,10 @@
         bun
         nodejs_22
         sqls
+        bunyan-rs
+        trivy
+        _1password-cli
+        superfile
         # (pkgs.rustPlatform.buildRustPackage rec {  looks like it taking flit sources
         #   pname = "protols";
         #   version = "0.6.0";
@@ -87,15 +91,17 @@
         # })
       ];
 
+      nixpkgs.config.allowUnfree = true;
+
       imports = [
         nixvim.nixDarwinModules.nixvim
         ./nvim
         home-manager.darwinModules.home-manager
         {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          # home-manager.users.jdoe = import ./home.nix;
-
+          # home-manager.useGlobalPkgs = true;
+          # home-manager.useUserPackages = true;
+          # home-manager.users.owla = import ./home.nix;
+          #
           # home-manager.users.user = {pkgs, ...}: {
           #   home.stateVersion = "24.11";
           #   # home.homeDirectory = "/Users/user/";

@@ -90,7 +90,14 @@ in {
       {
         mode = "n";
         key = "<leader>fmt";
-        action = "<cmd>!ghokin fmt replace .<CR>";
+        # action = "<cmd>!ghokin fmt replace .<CR>";
+        action.__raw = ''
+          function()
+             local filepath = vim.fn.expand('%:p')
+             local escaped_path = vim.fn.shellescape(filepath)
+             vim.cmd('!ghokin fmt replace ' .. escaped_path)
+          end
+        '';
         options = {
           desc = "Reformat";
         };

@@ -93,26 +93,33 @@
 
       nixpkgs.config.allowUnfree = true;
 
+      # users.users.user = {
+      #   name = "owla";
+      #   home = "/Users/user";
+      # };
+
       imports = [
         nixvim.nixDarwinModules.nixvim
         ./nvim
         home-manager.darwinModules.home-manager
         {
-          # home-manager.useGlobalPkgs = true;
-          # home-manager.useUserPackages = true;
-          # home-manager.users.owla = import ./home.nix;
-          #
-          # home-manager.users.user = {pkgs, ...}: {
-          #   home.stateVersion = "24.11";
-          #   # home.homeDirectory = "/Users/user/";
-          #   programs = {
-          #     tmux = {
-          #       enable = true;
-          #       plugins = [
-          #         pkgs.tmuxPlugins.resurrect
-          #       ];
+          # home-manager = {
+          #   users = {
+          #     user = {pkgs, ...}: {
+          #       home.stateVersion = "24.11";
+          #       home.homeDirectory = "/Users/user";
+          #       programs = {
+          #         tmux = {
+          #           enable = true;
+          #           plugins = [
+          #             pkgs.tmuxPlugins.resurrect
+          #           ];
+          #         };
+          #       };
           #     };
           #   };
+          #   useGlobalPkgs = true;
+          #   useUserPackages = true;
           # };
 
           # Optionally, use home-manager.extraSpecialArgs to pass

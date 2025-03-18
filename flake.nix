@@ -55,7 +55,6 @@
         mermaid-cli
         hoppscotch
         tmux
-        dbeaver-bin
         buf
         cargo
         rustc

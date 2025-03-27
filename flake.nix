@@ -49,7 +49,6 @@
               pip
             ])
         )
-        lazydocker
         golangci-lint
         d2
         mermaid-cli

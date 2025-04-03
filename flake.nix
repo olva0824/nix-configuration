@@ -9,6 +9,9 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixvim-olva = {
+      url = "github:olva0503/olva-nixvim";
+    };
     nixvim = {
       url = "github:nix-community/nixvim";
       # url = "github:nix-community/nixvim/nixos-24.05";
@@ -22,6 +25,7 @@
     nix-darwin,
     nixpkgs,
     nixvim,
+    nixvim-olva,
     home-manager,
   }: let
     configuration = {pkgs, ...}: {
@@ -72,6 +76,8 @@
         trivy
         _1password-cli
         superfile
+        protols
+        # (nixvim-olva.packages.${system}.default)
         # (pkgs.rustPlatform.buildRustPackage rec {  looks like it taking flit sources
         #   pname = "protols";
         #   version = "0.6.0";
@@ -157,11 +163,32 @@
         zsh = {
           enable = true;
         };
+
         nixvim.enable = true;
       };
       fonts.packages = with pkgs; [
         nerd-fonts.mononoki
       ];
+
+      # trying to override
+      # nixvim-olva = {
+      #   keymaps = [
+      #     {
+      #       mode = ["n" "v"];
+      #       key = "<leader>uid";
+      #       action.__raw = ''
+      #         function()
+      #            local uuid = vim.fn.system("uuidgen"):gsub("\n", "")
+      #            uuid = string.lower(uuid)
+      #            vim.api.nvim_put({uuid}, "", true, true)
+      #         end
+      #       '';
+      #       options = {
+      #         desc = "Put UUID";
+      #       };
+      #     }
+      #   ];
+      # };
       # nix.package = pkgs.nix;
 
       # Necessary for using flakes on this system.

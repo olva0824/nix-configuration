@@ -29,6 +29,22 @@ in {
           "*.feature"
         ];
       }
+      # {
+      #   event = [
+      #     "BufWritePre"
+      #   ];
+      #   pattern = [
+      #     "*.go"
+      #   ];
+      #   callback.__raw = ''
+      #   function()
+      #   local last_line = vim.fn.line("$")
+      #   if last_line > 1 and vim.fn.getline("$") ~= "" then
+      #       vim.fn.append(last_line, "")
+      #       end
+      #   end
+      #   '';
+      # }
     ];
     keymaps = [
       # Press 'H', 'L' to jump to start/end of a line (first/last character)
@@ -578,7 +594,6 @@ in {
       -- E.g.: opts = { equivalence_classes = {} }
       opts = {}
       }
-      require'lspconfig'.protols.setup{}
 
     '';
     extraPlugins = with pkgs.vimPlugins; [
@@ -666,6 +681,7 @@ in {
       scrolloff = 16;
       # timeoutlen = 10;
       list = true;
+      fixendofline = true;
       spell = true;
       spelllang = ["en_us"];
     };
@@ -874,10 +890,10 @@ in {
         enable = true;
         sources = {
           formatting = {
-            goimports.enable = true;
-            gofmt.enable = true;
+            goimports.enable = true; # no needed because of gofumpt
+            gofmt.enable = false; # no needed because of gofumpt
             buf.enable = true;
-            gofumpt.enable = true;
+            gofumpt.enable = false;
             alejandra.enable = true;
           };
           diagnostics = {
@@ -1024,9 +1040,6 @@ in {
             };
             shellharden = {
               command = "${lib.getExe pkgs.shellharden}";
-            };
-            goftm = {
-              comand = "${lib.getExe pkgs.gofumpt}";
             };
             #yamlfmt = {
             #  command = "${lib.getExe pkgs.yamlfmt}";
@@ -1592,6 +1605,14 @@ in {
                 desc = "LSP: [G]oto [R]eferences";
               };
             }
+            {
+              mode = "n";
+              key = "<leader>gfh";
+              action.__raw = "require('telescope.builtin').git_bcommits";
+              options = {
+                desc = "File commit history";
+              };
+            }
             # Jump to the implementation of the word under your cursor.
             #  Useful when your language has ways of declaring types without an actual implementation.
             {
@@ -1685,11 +1706,13 @@ in {
         '';
 
         servers = {
+          protols.enable = true;
           cucumber_language_server = {
             enable = true;
             package = null;
           };
-          nixd.enable = true;
+          # nixd.enable = true;
+          nil-ls.enable = true;
           # nil-ls = {enable = true;};
           jsonls.enable = true;
           gopls = {

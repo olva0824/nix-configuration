@@ -29,22 +29,6 @@ in {
           "*.feature"
         ];
       }
-      # {
-      #   event = [
-      #     "BufWritePre"
-      #   ];
-      #   pattern = [
-      #     "*.go"
-      #   ];
-      #   callback.__raw = ''
-      #   function()
-      #   local last_line = vim.fn.line("$")
-      #   if last_line > 1 and vim.fn.getline("$") ~= "" then
-      #       vim.fn.append(last_line, "")
-      #       end
-      #   end
-      #   '';
-      # }
     ];
     keymaps = [
       # Press 'H', 'L' to jump to start/end of a line (first/last character)
@@ -54,7 +38,7 @@ in {
         action = "$";
       }
       {
-        mode = ["n"];
+        mode = ["n" "v"];
         key = "H";
         action = "^";
       }
@@ -550,17 +534,7 @@ in {
       require('dap').listeners.before.event_terminated['dapui_config'] = require('dapui').close
       require('dap').listeners.before.event_exited['dapui_config'] = require('dapui').close
       vim.api.nvim_set_hl(0, 'LeapBackdrop', { link = 'Comment' })
-      require('flit').setup {
-      keys = { f = 'f', F = 'F', t = 't', T = 'T' },
-      -- A string like "nv", "nvo", "o", etc.
-      labeled_modes = "v",
-      -- Repeat with the trigger key itself.
-      clever_repeat = true,
-      multiline = true,
-      -- Like `leap`s similar argument (call-specific overrides).
-      -- E.g.: opts = { equivalence_classes = {} }
-      opts = {}
-      }
+
 
     '';
     extraPlugins = with pkgs.vimPlugins; [
@@ -653,6 +627,7 @@ in {
       spelllang = ["en_us"];
     };
     plugins = {
+      flit.enable = true;
       web-devicons.enable = true;
       markdown-preview.enable = true;
       barbar = {

@@ -104,21 +104,6 @@ in {
         };
       }
       {
-        mode = "n";
-        key = "<leader>fmt";
-        # action = "<cmd>!ghokin fmt replace .<CR>";
-        action.__raw = ''
-          function()
-             local filepath = vim.fn.expand('%:p')
-             local escaped_path = vim.fn.shellescape(filepath)
-             vim.cmd('!ghokin fmt replace ' .. escaped_path)
-          end
-        '';
-        options = {
-          desc = "Reformat";
-        };
-      }
-      {
         mode = ["n"];
         key = "<leader>glb";
         action = "<cmd>Gitsigns toggle_current_line_blame<CR>";
@@ -430,25 +415,7 @@ in {
           silent = true;
         };
       }
-      {
-        mode = "n";
-        key = "<leader>tb";
-        action.__raw = ''
-          function()
-           require('dap').run({
-             type = "go",
-             name = "TestAllSuites",
-             request = "launch",
-             mode = "test",
-             program = "./tests",
-             args = { "-test.run", "TestAllSuites", "-godog.tags", "@wip"},
-           })
-           end
-        '';
-        options = {
-          desc = "Debug bdd test";
-        };
-      }
+
       ### GIT signs
       {
         mode = "n";

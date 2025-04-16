@@ -33,7 +33,8 @@
       # $ nix-env -qaP | grep wget
       environment.systemPackages = with pkgs; [
         vim
-        go
+        # go
+        go_1_23
         gofumpt
         zig
         fzf
@@ -106,6 +107,7 @@
         nixvim.nixDarwinModules.nixvim
         ./nvim
         home-manager.darwinModules.home-manager
+
         {
           # home-manager = {
           #   users = {

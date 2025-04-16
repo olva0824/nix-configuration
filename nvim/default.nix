@@ -31,6 +31,40 @@ in {
       }
     ];
     keymaps = [
+      {
+        mode = "n";
+        key = "<leader>fmt";
+        # action = "<cmd>!ghokin fmt replace .<CR>";
+        action.__raw = ''
+          function()
+             local filepath = vim.fn.expand('%:p')
+             local escaped_path = vim.fn.shellescape(filepath)
+             vim.cmd('!ghokin fmt replace ' .. escaped_path)
+          end
+        '';
+        options = {
+          desc = "Reformat";
+        };
+      }
+      {
+        mode = "n";
+        key = "<leader>tb";
+        action.__raw = ''
+          function()
+           require('dap').run({
+             type = "go",
+             name = "TestAllSuites",
+             request = "launch",
+             mode = "test",
+             program = "./tests",
+             args = { "-test.run", "TestAllSuites", "-godog.tags", "@wip"},
+           })
+           end
+        '';
+        options = {
+          desc = "Debug bdd test";
+        };
+      }
       # Press 'H', 'L' to jump to start/end of a line (first/last character)
       {
         mode = ["n" "v"];
@@ -1641,6 +1675,7 @@ in {
           --
           -- This may be unwanted, since they displace some of your code
           if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
+            vim.lsp.inlay_hint.enable(false)
             map('<leader>th', function()
               vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
             end, '[T]oggle Inlay [H]ints')
@@ -1653,8 +1688,7 @@ in {
             enable = true;
             package = null;
           };
-          # nixd.enable = true;
-          nil-ls.enable = true;
+          nixd.enable = true;
           # nil-ls = {enable = true;};
           jsonls.enable = true;
           gopls = {
@@ -1777,6 +1811,11 @@ in {
       lsp-format = {
         #TODO consider using it
         enable = true;
+        settings = {
+          sql = {
+            exclude = ["sqls" "slqls"];
+          };
+        };
       };
       lsp-status.enable = true;
       nvim-jdtls = {

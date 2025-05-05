@@ -530,6 +530,42 @@ in {
           desc = "Rename";
         };
       }
+      #harpoon
+      {
+        mode = "n";
+        key = "<leader>ha";
+        action.__raw = "function() require'harpoon':list():add() end";
+      }
+      {
+        mode = "n";
+        key = "<C-e>";
+        action.__raw = "function() require'harpoon'.ui:toggle_quick_menu(require'harpoon':list()) end";
+      }
+      {
+        mode = "n";
+        key = "<leader>1";
+        action.__raw = "function() require'harpoon':list():select(1) end";
+      }
+      {
+        mode = "n";
+        key = "<leader>2";
+        action.__raw = "function() require'harpoon':list():select(2) end";
+      }
+      {
+        mode = "n";
+        key = "<leader>3";
+        action.__raw = "function() require'harpoon':list():select(3) end";
+      }
+      {
+        mode = "n";
+        key = "<leader>4";
+        action.__raw = "function() require'harpoon':list():select(4) end";
+      }
+      {
+        mode = ["n" "v"];
+        key = "<leader>ia";
+        action = "<CMD>CodeCompanion<CR>";
+      }
     ];
     highlight.Todo = {
       fg = "Blue";
@@ -708,11 +744,11 @@ in {
                       },
                       schema = {
                           model = {
-                              default = 'qwen2.5-coder:14b',
+                              default = 'qwen2.5-coder:1.5b',
                           },
-                         -- num_ctx = {
-                          --     default = 32768,
-                          -- },
+                         num_ctx = {
+                              default = 32000,
+                          },
                       },
                   })
                 end
@@ -1026,22 +1062,6 @@ in {
 
       harpoon = {
         enable = true;
-
-        keymapsSilent = true;
-
-        keymaps = {
-          addFile = "<leader>ha";
-          toggleQuickMenu = "<C-e>";
-          navFile = {
-            "1" = "<leader>1";
-            "2" = "<leader>2";
-            "3" = "<leader>3";
-            "4" = "<leader>4";
-            "5" = "<leader>5";
-            "6" = "<leader>6";
-            "7" = "<leader>7";
-          };
-        };
       };
       leap = {
         enable = true;
@@ -1818,9 +1838,9 @@ in {
         };
       };
       lsp-status.enable = true;
-      nvim-jdtls = {
+      jdtls = {
         enable = true;
-        data = "~/.cache/jdtls/workspace";
+        # data = "~/.cache/jdtls/workspace";
       };
 
       #TESTS

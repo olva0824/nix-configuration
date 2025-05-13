@@ -72,7 +72,7 @@
         bat
         bun
         nodejs_22
-        sqls
+        sqlfluff
         bunyan-rs
         trivy
         _1password-cli

@@ -907,6 +907,7 @@ in {
             buf.enable = true;
             gofumpt.enable = false;
             alejandra.enable = true;
+            sqlfluff.enable = true;
           };
           diagnostics = {
             # buf.enable = true;

@@ -72,7 +72,8 @@
         bat
         bun
         nodejs_22
-        sqls
+        sqlfluff
+        mprocs
         bunyan-rs
         trivy
         _1password-cli

@@ -9,25 +9,18 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixvim-olva = {
-      url = "github:olva0503/olva-nixvim";
-    };
     nixvim = {
-      url = "github:nix-community/nixvim";
-      # url = "github:nix-community/nixvim/nixos-24.05";
-
-      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:olva0503/olva-nixvim";
     };
   };
 
-  outputs = inputs @ {
+  outputs = {
     self,
     nix-darwin,
     nixpkgs,
     nixvim,
-    nixvim-olva,
     home-manager,
-  }: let
+  } @ inputs: let
     configuration = {pkgs, ...}: {
       # List packages installed in system profile. To search by name, run:
       # $ nix-env -qaP | grep wget
@@ -56,7 +49,6 @@
         delve #debug adapter for golang
         #
         mermaid-cli
-        tmux
         buf
         cargo
         rustc
@@ -78,44 +70,29 @@
         yazi
         protols
         hurl
-
-        (nixvim-olva.lib.makeNixvimWithExtra system ./nvim/project-specifix.nix)
+        evil-helix
+        (nixvim.lib.makeNixvimWithExtra system ./nvim/project-specifix.nix)
       ];
 
       nixpkgs.config.allowUnfree = true;
 
-      # users.users.user = {
-      #   name = "owla";
-      #   home = "/Users/user";
-      # };
+      users.users.user = {
+        #   name = "owla";
+        home = "/Users/user";
+      };
 
       imports = [
         # nixvim.nixDarwinModules.nixvim
         # ./nvim
-        # home-manager.darwinModules.home-manager
-
+        home-manager.darwinModules.home-manager
         {
-          # home-manager = {
-          #   users = {
-          #     user = {pkgs, ...}: {
-          #       home.stateVersion = "24.11";
-          #       home.homeDirectory = "/Users/user";
-          #       programs = {
-          #         tmux = {
-          #           enable = true;
-          #           plugins = [
-          #             pkgs.tmuxPlugins.resurrect
-          #           ];
-          #         };
-          #       };
-          #     };
-          #   };
-          #   useGlobalPkgs = true;
-          #   useUserPackages = true;
-          # };
-
-          # Optionally, use home-manager.extraSpecialArgs to pass
-          # arguments to home.nix
+          home-manager = {
+            users = {
+              user = import ./home.nix;
+            };
+            useGlobalPkgs = true;
+            useUserPackages = true;
+          };
         }
       ];
 

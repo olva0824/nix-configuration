@@ -6,7 +6,69 @@
       cmd = ["npx" "cucumber-language-server" "--stdio"];
       enable = lib.mkForce false;
     };
+    lsp.servers.ltex_plus.enable = lib.mkForce true;
+    blink-cmp-copilot.enable = true;
+    blink-cmp = {
+      settings = {
+        sources = {
+          default = [
+            "lsp"
+            "path"
+            "snippets"
+            "buffer"
+            "spell"
+            "copilot"
+            # Make it too slow
+            # "dictionary"
+          ];
+        };
+      };
+    };
+    codecompanion = lib.mkForce {
+        enable = true;
+        settings = {
+          adapters = {
+            ollama = {
+              __raw = ''
+                function()
+                  return require('codecompanion.adapters').extend('ollama', {
+                      env = {
+                          url = "http://127.0.0.1:11434",
+                      },
+                      schema = {
+                          model = {
+                              default = 'qwen2.5-coder:1.5b',
+                          },
+                         num_ctx = {
+                              default = 32000,
+                          },
+                      },
+                  })
+                end
+              '';
+            };
+          };
+          opts = {
+            log_level = "TRACE";
+            send_code = true;
+            use_default_actions = true;
+            use_default_prompts = true;
+          };
+          strategies = {
+            agent = {
+              adapter = "ollama";
+            };
+            chat = {
+              adapter = "ollama";
+            };
+            inline = {
+              adapter = "ollama";
+            };
+          };
+        };
+      };
   };
+
   keymaps = [
     {
       mode = "n";

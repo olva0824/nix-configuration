@@ -6,6 +6,7 @@
       cmd = ["npx" "cucumber-language-server" "--stdio"];
       enable = lib.mkForce false;
     };
+    lsp.servers.ltex_plus.enable = lib.mkForce true;
   };
   keymaps = [
     {

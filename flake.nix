@@ -55,7 +55,6 @@
         protobuf_27
         protoc-gen-go
         statix
-        pulumi-bin
         ollama
         atuin
         btop

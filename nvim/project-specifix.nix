@@ -37,10 +37,10 @@
                     },
                     schema = {
                         model = {
-                            default = 'deepseek-r1:8b',
+                            default = 'qwen3:14b',
                         },
                        num_ctx = {
-                            default = 32000,
+                            default = 16000,
                         },
                     },
                 })
@@ -102,6 +102,22 @@
       '';
       options = {
         desc = "Debug bdd test";
+      };
+    }
+    {
+      mode = "n";
+      key = "]b";
+      action = "<cmd>BufferNext<CR>";
+      options = {
+        desc = "Buffer next";
+      };
+    }
+    {
+      mode = "n";
+      key = "[b";
+      action = "<cmd>BufferPrevious<CR>";
+      options = {
+        desc = "Buffer previous";
       };
     }
   ];

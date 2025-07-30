@@ -14,9 +14,19 @@ in {
     obsidian
     nixd
     tokei
+    hoppscotch
+    iterm2
   ];
 
+  home.shellAliases = {
+    gherkin-lint = "npx gherkin-lint";
+  };
+
   programs = {
+    zoxide = {
+      enable = true;
+      enableZshIntegration = true;
+    };
     tmux = {
       enable = true;
       baseIndex = 1;
@@ -41,7 +51,7 @@ in {
         set-option -sa terminal-overrides ",xterm*:Tc"
         set -g mouse on
         set-window-option -g pane-base-index 1
-        set-option -g renumber-windows on
+        set-option -g renumber-windows off
 
         # set vi-mode
         set-window-option -g mode-keys vi

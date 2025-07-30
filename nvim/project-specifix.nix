@@ -1,12 +1,13 @@
 {lib, ...}: {
+  opts = {
+    signcolumn = "yes";
+  };
   plugins = {
     fidget.enable = lib.mkForce false;
-    git-conflict.enable = true;
     lsp.servers.cucumber_language_server = {
       cmd = ["npx" "cucumber-language-server" "--stdio"];
       enable = lib.mkForce false;
     };
-    lsp.servers.ltex_plus.enable = lib.mkForce true;
     blink-cmp-copilot.enable = true;
     blink-cmp = {
       settings = {
@@ -105,20 +106,23 @@
       };
     }
     {
-      mode = "n";
-      key = "]b";
-      action = "<cmd>BufferNext<CR>";
+      mode = "i";
+      key = "jk";
+      action = "<Esc>";
       options = {
-        desc = "Buffer next";
+        noremap = true;
+        silent = true;
       };
     }
     {
       mode = "n";
-      key = "[b";
-      action = "<cmd>BufferPrevious<CR>";
-      options = {
-        desc = "Buffer previous";
-      };
+      key = "]c";
+      action = "<cmd>GitConflictNextConflict<CR>";
+    }
+    {
+      mode = "n";
+      key = "[c";
+      action = "<cmd>GitConflictPrevConflict<CR>";
     }
   ];
 }

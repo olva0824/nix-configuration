@@ -25,7 +25,7 @@
       # List packages installed in system profile. To search by name, run:
       # $ nix-env -qaP | grep wget
       environment.systemPackages = with pkgs; [
-        vim
+        gemini-cli
         zig
         fzf
         ripgrep
@@ -52,8 +52,8 @@
         buf
         cargo
         rustc
-        protobuf_27
-        protoc-gen-go
+        # protobuf_27
+        # protoc-gen-go
         statix
         ollama
         atuin

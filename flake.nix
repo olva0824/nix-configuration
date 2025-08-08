@@ -137,11 +137,13 @@
   in {
     # Build darwin flake using:
     # $ darwin-rebuild build --flake .#cmadmins-MacBook-Pro
-    darwinConfigurations."cmadmins-MacBook-Pro" = nix-darwin.lib.darwinSystem {
+    #darwinConfigurations."cmadmins-MacBook-Pro" = nix-darwin.lib.darwinSystem {
+    #  modules = [configuration];
+    #};
+    darwinConfigurations.MacBook-Pro= nix-darwin.lib.darwinSystem {
       modules = [configuration];
     };
-
     # Expose the package set, including overlays, for convenience.
-    darwinPackages = self.darwinConfigurations."cmadmins-MacBook-Pro".pkgs;
+    darwinPackages = self.darwinConfigurations."MacBook-Pro".pkgs;
   };
 }

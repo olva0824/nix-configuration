@@ -16,6 +16,8 @@ in {
     tokei
     hoppscotch
     iterm2
+    wordnet
+    fd
   ];
 
   home.shellAliases = {

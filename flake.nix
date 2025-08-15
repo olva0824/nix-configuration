@@ -55,7 +55,7 @@
         # protobuf_27
         # protoc-gen-go
         statix
-        ollama
+        # ollama
         atuin
         btop
         bat
@@ -140,7 +140,7 @@
     #darwinConfigurations."cmadmins-MacBook-Pro" = nix-darwin.lib.darwinSystem {
     #  modules = [configuration];
     #};
-    darwinConfigurations.MacBook-Pro= nix-darwin.lib.darwinSystem {
+    darwinConfigurations.MacBook-Pro = nix-darwin.lib.darwinSystem {
       modules = [configuration];
     };
     # Expose the package set, including overlays, for convenience.

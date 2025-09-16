@@ -45,10 +45,10 @@ in {
         bind C-Space send-prefix
 
         # Vim style pane selection
-        bind h select-pane -L
-        bind j select-pane -D
-        bind k select-pane -U
-        bind l select-pane -R
+        bind h select-pane -L \; resize-pane -Z
+        bind j select-pane -D \; resize-pane -Z
+        bind k select-pane -U \; resize-pane -Z
+        bind l select-pane -R \; resize-pane -Z
 
         set-option -sa terminal-overrides ",xterm*:Tc"
         set -g mouse on

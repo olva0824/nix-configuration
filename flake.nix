@@ -44,6 +44,7 @@
         ###go
         golangci-lint
         # go
+        ngrok
         go_1_23
         gofumpt
         delve #debug adapter for golang

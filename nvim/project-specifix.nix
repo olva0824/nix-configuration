@@ -240,7 +240,7 @@
                     },
                     schema = {
                         model = {
-                            default = 'qwen3:14b',
+                            default = 'mistral:4b-instruct',
                         },
                        num_ctx = {
                             default = 16000,

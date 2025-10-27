@@ -53,10 +53,7 @@
         buf
         cargo
         rustc
-        # protobuf_27
-        # protoc-gen-go
         statix
-        # ollama
         atuin
         btop
         bat

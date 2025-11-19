@@ -4,6 +4,11 @@
   };
   autoCmd = [
     {
+      event = "FileType";
+      pattern = "helm";
+      command = "LspRestart";
+    }
+    {
       callback.__raw = ''
         function()
             vim.lsp.buf.format({})
@@ -114,9 +119,13 @@
   '';
 
   plugins = {
-    lsp.servers.cucumber_language_server = {
-      cmd = ["npx" "cucumber-language-server" "--stdio"];
-      enable = lib.mkForce false;
+    helm.enable = true;
+    lsp.servers = {
+      cucumber_language_server = {
+        cmd = ["npx" "cucumber-language-server" "--stdio"];
+        enable = lib.mkForce false;
+      };
+      helm_ls.enable = true;
     };
     blink-cmp-copilot.enable = true;
     lsp-format.enable = lib.mkForce false;
